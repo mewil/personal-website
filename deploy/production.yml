@@ -1,0 +1,12 @@
+version: '2'
+services:
+  mwilson_nginx:
+    extends:
+      file: docker-compose.yml
+      service: mwilson_nginx
+  mwilson_website:
+    extends:
+      file: docker-compose.yml
+      service: mwilson_website
+    env_file:
+      - production.env
