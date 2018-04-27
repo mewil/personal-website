@@ -54,7 +54,7 @@ class Landing extends React.Component {
         return (
             <Wrapper>
                 <Container>
-                    <Text>MICHAEL WILSON</Text>
+                    <Text>Projects</Text>
                 </Container>
             </Wrapper>
         );

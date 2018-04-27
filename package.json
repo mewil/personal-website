@@ -74,6 +74,7 @@
         "react-measure": "^1.4.6",
         "react-notification": "^6.7.1",
         "react-particles-js": "^2.1.2",
+        "react-pdf": "^3.0.4",
         "react-redux": "^5.0.3",
         "react-router": "^4.0.0",
         "react-router-dom": "^4.1.1",

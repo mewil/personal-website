@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch } from 'react-router';
-import { ConnectedRouter, routerMiddleware } from 'react-router-redux';
+import { Router, Switch, Route } from 'react-router';
 import createHistory from 'history/createBrowserHistory';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -24,11 +23,10 @@ import {
 require('es6-promise').polyfill();
 
 const history = createHistory();
-const middleware = routerMiddleware(history);
 const store = createStore(
     reducers,
     undefined,
-    applyMiddleware(thunkMiddleware, middleware)
+    applyMiddleware(thunkMiddleware)
 );
 
 window.s = store;
@@ -39,7 +37,7 @@ class AppProvider extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <ConnectedRouter history={history}>
+                <Router history={history}>
                     <Navigator>
                         <Switch>
                             <Route
@@ -75,7 +73,7 @@ class AppProvider extends React.Component {
                             <Route component={HomePage} />
                         </Switch>
                     </Navigator>
-                </ConnectedRouter>
+                </Router>
             </Provider>
         );
     }

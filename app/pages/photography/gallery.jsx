@@ -54,7 +54,7 @@ class Gallery extends React.Component {
         return (
             <Wrapper>
                 <Container>
-                    <Text>MICHAEL WILSON</Text>
+                    <Text>Photography</Text>
                 </Container>
             </Wrapper>
         );

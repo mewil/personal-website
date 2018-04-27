@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 import { routes } from '../constants';
 import { devices } from '../styles';
 import theme from '../styles/theme.js';
@@ -29,7 +30,7 @@ const Wrapper = styled.div`
     height: 80px;
     alignItems: center;
     justifyContent: flex-start;
-    background: ${theme.primary};
+    background: transparent;
 `;
 
 const FlexWrapper = styled.div`
@@ -44,17 +45,19 @@ const FlexWrapper = styled.div`
     `};
 `;
 
-const StyledHeaderLink = styled.a`
+const StyledNavLink = styled(NavLink)`
     font-size: 20px;
     padding: 2px 35px;
     margin: 10px 0 10px 15px;
-    color: white;
-    border: 1px solid transparent;
+    color: ${theme.primary};
     transition: all 0.4s;
     text-decoration: none;
     text-transform: uppercase;
+    border: 1px solid transparent;
+    background: transparent;
     &:hover {
-        border: 1px solid white;
+        border: 1px solid ${theme.primary};
+        background: ${theme.secondary};
     }
 `;
 
@@ -62,35 +65,26 @@ class Header extends React.Component {
     render() {
         return (
             <div>
-                {window.location.pathname == routes.SUBSCRIBE ? null : (
-                    <div>
-                        <Helmet>
-                            <title>Michael Wilson</title>
-                        </Helmet>
-                        <Wrapper>
-                            <FlexWrapper>
-                                <StyledHeaderLink href={routes.HOME}>
-                                    Home
-                                </StyledHeaderLink>
-                                <StyledHeaderLink href={routes.PROJECTS}>
-                                    Projects
-                                </StyledHeaderLink>
-                                <StyledHeaderLink href={routes.PHOTOGRAPHY}>
-                                    Photography
-                                </StyledHeaderLink>
-                                <StyledHeaderLink href={routes.VIDEOGRAPHY}>
-                                    Videography
-                                </StyledHeaderLink>
-                                <StyledHeaderLink href={routes.RESUME}>
-                                    Resume
-                                </StyledHeaderLink>
-                                <StyledHeaderLink href={routes.CONTACT}>
-                                    Contact
-                                </StyledHeaderLink>
-                            </FlexWrapper>
-                        </Wrapper>
-                    </div>
-                )}
+                <Helmet>
+                    <title>Michael Wilson</title>
+                </Helmet>
+                <Wrapper>
+                    <FlexWrapper>
+                        <StyledNavLink to={routes.PROJECTS}>
+                            Projects
+                        </StyledNavLink>
+                        <StyledNavLink to={routes.PHOTOGRAPHY}>
+                            Photography
+                        </StyledNavLink>
+                        <StyledNavLink to={routes.VIDEOGRAPHY}>
+                            Videography
+                        </StyledNavLink>
+                        <StyledNavLink to={routes.RESUME}>Resume</StyledNavLink>
+                        <StyledNavLink to={routes.CONTACT}>
+                            Contact
+                        </StyledNavLink>
+                    </FlexWrapper>
+                </Wrapper>
             </div>
         );
     }
@@ -98,8 +92,6 @@ class Header extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        userState: state.userState,
-        configurationState: state.configurationState,
         theme: state.theme.data
     };
 };
