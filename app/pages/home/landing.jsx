@@ -35,17 +35,17 @@ const Container = styled.div`
     `};
 `;
 
-const Text = styled.h2`
-    fontSize: 30px;
+const Text = styled.h5`
+    fontSize: 20px;
     color: ${theme.primary};
     text-align: center;
-    fontWeight: 500;
+    fontWeight: 400;
     textAlign: center;
     padding: 0 10vw;
     margin: 5px 0;
 
     ${devices.tablet`
-        fontSize: 50px;
+        fontSize: 30px;
     `};
 `;
 
