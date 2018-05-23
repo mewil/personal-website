@@ -4,9 +4,18 @@ services:
     extends:
       file: docker-compose.yml
       service: mwilson_nginx
+    labels:
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
+      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen"
   mwilson_website:
     extends:
       file: docker-compose.yml
       service: mwilson_website
     env_file:
       - production.env
+  mwilson_nginx_letsencrypt:
+    extends:
+      file: docker-compose.yml
+      service: mwilson_nginx_letsencrypt
+    volumes_from:
+        - "mwilson_nginx"
