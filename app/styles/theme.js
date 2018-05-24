@@ -7,8 +7,8 @@ function generateBackgroundGradient(angle, alpha) {
 export default {
     // Color primitives
     primaryFont: 'Ubuntu Mono',
-    secondary: '#262626',
-    primary: '#FFFFFF',
+    primary: '#262626',
+    secondary: '#FFFFFF',
     highlight: '#f4a4a8',
     highlightSecondary: '#ebcdd1',
     backgroundGradient: generateBackgroundGradient(45, 1.0),
