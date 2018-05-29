@@ -17,18 +17,11 @@ process.on('rejectionHandled', rejection => {
 var config = require('./config/default.js');
 
 var http = require('http'),
-    morgan = require('morgan'),
     express = require('express'),
     app = express(),
     server = http.createServer(app),
     csrf = require('csurf'),
     csrfProtection = csrf(); // eslint-disable-line
-
-// Logging
-morgan.token('remote-addr', function(req) {
-    return req.headers['x-forwarded-for'] || req.ip;
-});
-app.use(morgan('combined'));
 
 // Disable x-powered-by
 app.disable('x-powered-by');
@@ -66,8 +59,10 @@ if (app.get('env') !== 'production' && !config.api_work) {
             log: console.log
         })
     );
+    app.use(express.static('static'));
 } else {
     // Static files middleware
+		app.use(express.static('static'));
     app.use(express.static('build'));
 
     app.use(function(req, res) {

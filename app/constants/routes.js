@@ -9,6 +9,7 @@ export default {
     PROJECTS: 'https://github.com/mewil',
     PHOTOGRAPHY: 'https://www.instagram.com/athenianlabsphotography',
     VIDEOGRAPHY: 'https://vimeo.com/athenianlabs',
-    RESUME: 'http://www-personal.umich.edu/~mewil/michael%20wilson%20resume.pdf',
+    RESUME:
+        'http://www-personal.umich.edu/~mewil/michael%20wilson%20resume.pdf',
     CONTACT: 'mailto:mewil@umich.edu'
 };

@@ -10,7 +10,7 @@ let cssExtractor = new ExtractTextWebpackPlugin('./[name].css');
 let lifecycleEvent = process.env.npm_lifecycle_event;
 
 let devConfig = {
-    entry: ['babel-polyfill', './app/app.jsx'],
+    entry: ['babel-polyfill', './app/app.js'],
     output: {
         publicPath: '/',
         path: path.resolve('./build'),
@@ -19,15 +19,15 @@ let devConfig = {
     devtool: 'source-map',
     resolve: {
       modules: ['web_modules', 'node_modules', 'app', 'static'],
-      extensions: ['.js', '.jsx'],
+      extensions: ['.js'],
     },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.js?$/,
                 enforce: 'pre',
                 use: ['eslint-loader'],
-                exclude: /node_modules/
+                exclude: /(node_modules|static)/
             },
             {
                 test: /\.css$/,
@@ -37,8 +37,8 @@ let devConfig = {
                 )]
             },
             {
-                test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
+                test: /\.js?$/,
+                exclude: /(node_modules|bower_components|static)/,
                 use: ['babel-loader']
             },
             {
@@ -75,7 +75,7 @@ let devConfig = {
 };
 
 let buildConfig = {
-    entry: ['babel-polyfill', './app/app.jsx'],
+    entry: ['babel-polyfill', './app/app.js'],
     output: {
         publicPath: '/',
         path: path.resolve('./build'),
@@ -83,12 +83,12 @@ let buildConfig = {
     },
     devtool: 'source-map',
     resolve: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.js']
     },
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.js?$/,
                 enforce: 'pre',
                 use: ['eslint-loader'],
                 exclude: /node_modules/
@@ -102,7 +102,7 @@ let buildConfig = {
                 })
             },
             {
-                test: /\.jsx?$/,
+                test: /\.js?$/,
                 exclude: /(node_modules|bower_components)/,
                 use: ['babel-loader']
             },
@@ -121,14 +121,14 @@ let buildConfig = {
         new webpack.DefinePlugin({
             'process.env.NODE_ENV': '"production"'
         }),
-        new CleanWebpackPlugin(['build/logo.png', 'build/fonts', 'build/js', 'build/styles', 'build/index.html']),
+        new CleanWebpackPlugin(['build/brain.svg', 'build/fonts', 'build/js', 'build/styles', 'build/index.html']),
         cssExtractor,
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             minimize: true
         }),
         new CopyWebpackPlugin([
-            { from: './static/logo.png', to: './logo.png' },
+            { from: './static/brain.svg', to: './brain.svg' },
             {context: './app/favicon/', from: '**/*', to: './favicon/'},
             {context: './app/fonts/', from: '**/*', to: './fonts/'}
         ]),
