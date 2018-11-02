@@ -4,28 +4,28 @@ import Script from 'react-load-script';
 import { devices } from './styles';
 
 const Container = styled.div`
-    position: 'relative';
+    position: relative;
     display: flex;
     align-self: center;
     align-items: center;
     justifyContent: center;
     margin-top: 60px;
-		overflow: visible;
+    overflow: visible;
 `;
 
 const ParticlesContainer = styled.div`
-    position: 'relative';
+    width: 80%;
+    height: 80%;
+    position: relative;
     display: flex;
     align-self: center;
     align-items: center;
     justify-content: center;
-    width: 90%;
-    height: 90%;
-		overflow: visible;
-		visibility: hidden;
-		${devices.tablet`
-			visibility: visible;
-		`};
+    overflow: visible;
+    visibility: hidden;
+    ${devices.tablet`
+        visibility: visible;
+    `};
 `;
 
 const Particles = () => {

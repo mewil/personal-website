@@ -9,7 +9,7 @@ const Container = styled.div`
 `;
 
 const HomeContent = () => {
-    return h(Container, [h('h2', 'Michael Wilson')]);
+    return h(Container, [h('h2', 'Michael Wilson'.toUpperCase())]);
 };
 
 export default HomeContent;

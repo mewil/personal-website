@@ -62,7 +62,7 @@ if (app.get('env') !== 'production' && !config.api_work) {
     app.use(express.static('static'));
 } else {
     // Static files middleware
-		app.use(express.static('static'));
+    app.use(express.static('static'));
     app.use(express.static('build'));
 
     app.use(function(req, res) {
