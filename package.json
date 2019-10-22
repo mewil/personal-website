@@ -15,6 +15,7 @@
   },
   "license": "UNLICENSED",
   "devDependencies": {
+    "autoprefixer": "^9.6.5",
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
@@ -27,7 +28,7 @@
     "clean-webpack-plugin": "^0.1.19",
     "connect-history-api-fallback": "^1.3.0",
     "copy-webpack-plugin": "^4.5.1",
-    "css-loader": "^0.28.11",
+    "css-loader": "^3.2.0",
     "es6-promise": "^4.1.0",
     "eslint": "^6.0.0-rc.0",
     "eslint-config-airbnb": "^16.1.0",
@@ -41,6 +42,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "html-webpack-plugin": "^3.2.0",
     "prop-types": "^15.7.2",
+    "randomatic": "^3.1.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.1.3",
@@ -49,6 +51,7 @@
     "react-load-script": "^0.0.6",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
+    "set-value": "^3.0.1",
     "style-loader": "^0.21.0",
     "styled-components": "^4.4.0",
     "webpack": "4.9.1",
@@ -56,8 +59,5 @@
     "webpack-dev-middleware": "^3.1.3",
     "webpack-dev-server": "^3.1.5",
     "webpack-hot-middleware": "^2.22.2"
-  },
-  "dependencies": {
-    "csurf": "^1.10.0"
   }
 }
