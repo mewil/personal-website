@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:11.10.1
 
 LABEL Author="Michael Wilson - mewil@umich.edu"
 
