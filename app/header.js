@@ -2,31 +2,23 @@ import styled from 'styled-components';
 import { Helmet } from 'react-helmet';
 import { div, title, h } from 'react-hyperscript-helpers';
 import { routes } from './constants';
-import { devices } from './styles';
-import theme from './styles/theme.js';
+import { devices, theme } from './styles';
 
-// const Favicon = require('../static/icons/logo.png');
-
-/* Header Section */
 const Wrapper = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    paddingTop: 10px
-    paddingBottom: 15px
-    zIndex: 100;
+    paddingtop: 10px;
+    paddingbottom: 15px;
+    zindex: 100;
     display: flex;
     height: 80px;
-    alignItems: center;
-    justifyContent: flex-start;
-    background: transparent;
+    alignitems: center;
+    justifycontent: flex-start;
+    background: white;
 `;
 
 const FlexWrapper = styled.div`
     display: flex;
-    alignItems: center;
-    justifyContent: flex-start;
+    align-items: center;
+    justify-content: flex-start;
     flex-direction: column;
     height: 90%;
     margin: 0 auto;
@@ -59,12 +51,13 @@ const StyledALink = styled.a`
     `};
 `;
 
-const Header = () => {
+export const Header = () => {
     return div([
         h(Helmet, [title('Michael Wilson')]),
         h(Wrapper, [
             h(FlexWrapper, [
                 h(StyledALink, { href: routes.PROJECTS }, ['Projects']),
+                h(StyledALink, { href: routes.LINKEDIN }, ['LinkedIn']),
                 h(StyledALink, { href: routes.PHOTOGRAPHY }, ['Photography']),
                 h(StyledALink, { href: routes.VIDEOGRAPHY }, ['Videography']),
                 h(StyledALink, { href: routes.RESUME }, ['Resume']),
@@ -73,5 +66,3 @@ const Header = () => {
         ])
     ]);
 };
-
-export default Header;

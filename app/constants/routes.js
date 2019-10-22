@@ -1,12 +1,7 @@
-// react-router routes
-export default {
+export const routes = {
     HOME: '/',
-    // PROJECTS: '/projects',
-    // PHOTOGRAPHY: '/photo',
-    // VIDEOGRAPHY: '/video',
-    // RESUME: '/resume',
-    // CONTACT: '/contact'
     PROJECTS: 'https://github.com/mewil',
+    LINKEDIN: 'https://www.linkedin.com/in/mewil/',
     PHOTOGRAPHY: 'https://www.instagram.com/athenianlabsphotography',
     VIDEOGRAPHY: 'https://vimeo.com/athenianlabs',
     RESUME:

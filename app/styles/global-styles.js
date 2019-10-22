@@ -1,11 +1,10 @@
-import { injectGlobal } from 'styled-components';
-import Theme from './theme.js';
+import { createGlobalStyle } from 'styled-components';
+import { theme } from './theme';
 
-// uses some bootstrap defaults
-injectGlobal`
+export const GlobalStyle = createGlobalStyle`
 body {
     margin: 0px;
-    font-family: ${Theme.primaryFont}, sans-serif;
+    font-family: ${theme.primaryFont}, sans-serif;
     font-size: 14px;
     line-height: 1.42857143;
 }

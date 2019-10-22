@@ -1,21 +1,19 @@
 import { h } from 'react-hyperscript-helpers';
 import styled from 'styled-components';
 import Script from 'react-load-script';
-import { devices } from './styles';
+import { devices, GlobalStyle } from './styles';
 
 const Container = styled.div`
     position: relative;
     display: flex;
     align-self: center;
     align-items: center;
-    justifyContent: center;
-    margin-top: 60px;
-    overflow: visible;
+    justify-content: center;
 `;
 
 const ParticlesContainer = styled.div`
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
     position: relative;
     display: flex;
     align-self: center;
@@ -23,16 +21,15 @@ const ParticlesContainer = styled.div`
     justify-content: center;
     overflow: visible;
     visibility: hidden;
-    ${devices.tablet`
+    ${devices.desktop`
         visibility: visible;
     `};
 `;
 
-const Particles = () => {
+export const Particles = () => {
     return h(Container, [
+        h(GlobalStyle),
         h(ParticlesContainer, '#particles-js'),
         h(Script, { url: 'particles.js' })
     ]);
 };
-
-export default Particles;

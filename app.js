@@ -41,7 +41,7 @@ if (app.get('env') !== 'production' && !config.api_work) {
         webpackDevMiddleware = require('webpack-dev-middleware'),
         webpackHotMiddleware = require('webpack-hot-middleware'),
         historyApiFallback = require('connect-history-api-fallback'),
-        webpackConfig = require('./webpack.dev.config'),
+        webpackConfig = require('./webpack.config'),
         webpackCompiler = webpack(webpackConfig),
         webpackMiddlewareInstance = webpackDevMiddleware(webpackCompiler, {
             publicPath: webpackConfig.output.publicPath,

@@ -1,5 +1,5 @@
-import Theme from './theme.js';
-import devices from './devices.js';
-import './global_styles.js';
+import { theme } from './theme';
+import { devices } from './devices';
+import { GlobalStyle } from './global-styles';
 
-export { Theme, devices };
+export { theme, devices, GlobalStyle };

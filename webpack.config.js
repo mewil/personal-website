@@ -52,7 +52,6 @@ let devConfig = {
         ]
     },
     plugins: [
-        // inject styles and javascript into index.html
         new HtmlWebpackPlugin({
             title: 'Webpack Build',
             template: './app/index.html'
@@ -106,10 +105,6 @@ let buildConfig = {
                 exclude: /(node_modules|bower_components)/,
                 use: ['babel-loader']
             },
-            // {
-            //     test: /\.(eot|ttf|woff|woff2|otf)(\?\S*)?$/,
-            //     use: ['file-loader?name=fonts/[name].[ext]']
-            // },
             { test: /\.(png|jpg|jpeg|gif|woff|svg|otf)$/, use: 'file-loader' }
         ]
     },
@@ -123,10 +118,6 @@ let buildConfig = {
         }),
         new CleanWebpackPlugin(['build/brain.svg', 'build/fonts', 'build/js', 'build/styles', 'build/index.html']),
         cssExtractor,
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            minimize: true
-        }),
         new CopyWebpackPlugin([
             { from: './static/brain.svg', to: './brain.svg' },
             {context: './app/favicon/', from: '**/*', to: './favicon/'},
@@ -145,6 +136,9 @@ let buildConfig = {
                 changeOrigin: true
             }
         }
+    },
+    optimization: {
+        minimize: true
     }
 };
 
