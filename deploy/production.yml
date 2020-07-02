@@ -1,21 +1,38 @@
 version: '2'
 services:
-  mwilson_nginx:
-    extends:
-      file: docker-compose.yml
-      service: mwilson_nginx
+  website:
+    image: website
+    container_name: website
+    restart: always
+    build:
+      context: ..
+    environment:
+      - NODE_ENV=production
+      - VIRTUAL_HOST=mewil.io
+      - LETSENCRYPT_HOST=mewil.io
+      - LETSENCRYPT_EMAIL=mewil@umich.edu
+
+  nginx:
+    image: jwilder/nginx-proxy
+    container_name: nginx
+    restart: always
+    volumes:
+      - /etc/nginx/certs
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
       - "com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen"
-  mwilson_website:
-    extends:
-      file: docker-compose.yml
-      service: mwilson_website
-    env_file:
-      - production.env
-  mwilson_nginx_letsencrypt:
-    extends:
-      file: docker-compose.yml
-      service: mwilson_nginx_letsencrypt
+    ports:
+      - 80:80
+      - 443:443
+
+  nginx_letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     volumes_from:
-        - "mwilson_nginx"
+        - nginx
