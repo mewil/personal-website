@@ -12,6 +12,20 @@ services:
       - LETSENCRYPT_HOST=mewil.io
       - LETSENCRYPT_EMAIL=mewil@umich.edu
 
+  grafana:
+    image: grafana/grafana:7.0.6
+    container_name: grafana
+    restart: always
+    environment:
+      - VIRTUAL_HOST=dashboard.mewil.io
+      - LETSENCRYPT_HOST=dashboard.mewil.io
+      - LETSENCRYPT_EMAIL=mewil@umich.edu
+      - GF_SECURITY_ADMIN_USER=mewil@umich.edu
+      - GF_SECURITY_COOKIE_SECURE=true
+      - GF_PANELS_DISABLE_SANITIZE_HTML=true
+    volumes:
+      - grafana_data:/var/lib/grafana
+
   nginx:
     image: jwilder/nginx-proxy
     container_name: nginx
@@ -36,3 +50,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     volumes_from:
         - nginx
+
+volumes:
+  grafana_data:
+    driver: local
