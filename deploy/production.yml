@@ -1,56 +1,86 @@
-version: '2'
+version: '3.3'
 services:
-  website:
-    image: website
-    container_name: website
+  traefik:
+    image: traefik:v2.2
+    container_name: traefik
     restart: always
-    build:
-      context: ..
+    command:
+      - --accesslog=true
+      - --api.dashboard=true
+      - --providers.docker
+      - --providers.docker.exposedbydefault=false
+      - --providers.file.filename=/traefik.yml
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entryPoints.web.http.redirections.entryPoint.to=websecure
+      - --entryPoints.web.http.redirections.entryPoint.scheme=https
+      - --entryPoints.web.http.redirections.entryPoint.permanent=true
+      - --certificatesResolvers.le.acme.email=${LETSENCRYPT_EMAIL}
+      - --certificatesResolvers.le.acme.storage=/letsencrypt/acme.json
+      - --certificatesResolvers.le.acme.tlschallenge=true
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - letsencrypt_data:/letsencrypt
+      - /var/run/docker.sock:/var/run/docker.sock
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik.rule=Host(`traefik.mewil.io`)"
+      - "traefik.http.routers.traefik.entrypoints=websecure"
+      - "traefik.http.routers.traefik.tls.certresolver=le"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=auth-middleware"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
+    configs:
+      - traefik.yml
+      
+  auth:
+    image: thomseddon/traefik-forward-auth:2.2.0
+    container_name: auth
+    restart: always
+    command: --whitelist=${LETSENCRYPT_EMAIL}
     environment:
-      - NODE_ENV=production
-      - VIRTUAL_HOST=mewil.io
-      - LETSENCRYPT_HOST=mewil.io
-      - LETSENCRYPT_EMAIL=mewil@umich.edu
+      - PROVIDERS_GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - PROVIDERS_GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      - SECRET=${AUTH_SECRET}
+      - COOKIE_DOMAIN=mewil.io
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.auth.loadbalancer.server.port=4181"
+      - "traefik.http.middlewares.auth-middleware.forwardauth.address=http://auth:4181"
+      - "traefik.http.middlewares.auth-middleware.forwardauth.authResponseHeaders=X-Forwarded-User"
 
   grafana:
     image: grafana/grafana:7.0.6
     container_name: grafana
     restart: always
     environment:
-      - VIRTUAL_HOST=dashboard.mewil.io
-      - LETSENCRYPT_HOST=dashboard.mewil.io
-      - LETSENCRYPT_EMAIL=mewil@umich.edu
-      - GF_SECURITY_ADMIN_USER=mewil@umich.edu
+      - GF_SECURITY_ADMIN_USER=${LETSENCRYPT_EMAIL}
       - GF_SECURITY_COOKIE_SECURE=true
+      - GF_AUTH_PROXY_ENABLED=true
+      - GF_AUTH_PROXY_HEADER_NAME=X-Forwarded-User
+      - GF_USERS_ALLOW_SIGNUP=false
+      - GF_USERS_AUTO_ASSIGN_ORG=true
+      - GF_LOG_MODE=console
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
     volumes:
       - grafana_data:/var/lib/grafana
-
-  nginx:
-    image: jwilder/nginx-proxy
-    container_name: nginx
-    restart: always
-    volumes:
-      - /etc/nginx/certs
-      - /etc/nginx/vhost.d
-      - /usr/share/nginx/html
-      - /var/run/docker.sock:/tmp/docker.sock:ro
     labels:
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy"
-      - "com.github.jrcs.letsencrypt_nginx_proxy_companion.docker_gen"
-    ports:
-      - 80:80
-      - 443:443
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`dashboard.mewil.io`)"
+      - "traefik.http.routers.grafana.entrypoints=websecure"
+      - "traefik.http.routers.grafana.tls.certresolver=le"
+      - "traefik.http.routers.grafana.service=api@internal"
+      - "traefik.http.routers.grafana.middlewares=auth-middleware"
+      - "traefik.http.services.traefik.loadbalancer.server.port=8080"
 
-  nginx_letsencrypt:
-    image: jrcs/letsencrypt-nginx-proxy-companion
-    container_name: letsencrypt
-    restart: always
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-    volumes_from:
-        - nginx
+configs:
+  traefik.yml:
+    file: ./traefik.yml.env
 
 volumes:
   grafana_data:
+    driver: local
+  letsencrypt_data:
     driver: local
