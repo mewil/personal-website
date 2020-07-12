@@ -1,13 +1,11 @@
 version: '2'
 services:
   website:
-    image: website
+    image: node:12
     container_name: website
-    build:
-      context: ..
     restart: always
     ports:
       - 7000:7000
     volumes:
       - ..:/usr/src/app
-    command: sh -c "yarn install && nodemon app.js"
+    command: sh -c "yarn install && yarn dev"

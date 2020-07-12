@@ -46,3 +46,5 @@ add_firewall_rules() {
 create_machine $NAME
 add_keys_to_machine $NAME
 add_firewall_rules $NAME
+MANAGER_IP=$(docker-machine ssh $NAME "ifconfig eth1 | grep 'inet ' | awk '{print \$2}'")
+docker-machine ssh $NAME "docker swarm init --advertise-addr $MANAGER_IP"

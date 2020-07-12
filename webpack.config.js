@@ -120,8 +120,7 @@ let buildConfig = {
         cssExtractor,
         new CopyWebpackPlugin([
             { from: './static/brain.svg', to: './brain.svg' },
-            {context: './app/favicon/', from: '**/*', to: './favicon/'},
-            {context: './app/fonts/', from: '**/*', to: './fonts/'}
+            { from: './static/particles.js', to: './particles.js' },
         ]),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin()

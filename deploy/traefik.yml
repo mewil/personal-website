@@ -1,9 +1,0 @@
-http:
-    routers:
-        website:
-            rule: Host(`mewil.io`)
-    services:
-        website:
-        loadBalancer:
-          server:
-          - url: "${CDN_URL}/home"
