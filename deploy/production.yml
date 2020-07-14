@@ -26,7 +26,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - letsencrypt_data:/letsencrypt
+      - letsencryptdata:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock
     secrets:
       - traefik.toml
@@ -76,6 +76,8 @@ services:
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
       - GF_DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/grafana
       - GF_DATABASE_SSL_MODE=require
+    volumes:
+      - grafanadata:/var/lib/grafana
     deploy:
       mode: replicated
       replicas: 1
@@ -96,5 +98,7 @@ networks:
     driver: overlay
 
 volumes:
-  letsencrypt_data:
-    driver: local
+  letsencryptdata:
+    external: true
+  grafanadata:
+    external: true
