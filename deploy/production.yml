@@ -11,7 +11,7 @@ services:
       - --providers.docker.network=mewil
       - --providers.docker.swarmMode=true
       - --providers.docker.exposedbydefault=false
-      - --providers.file.filename=/run/secrets/traefik.toml
+      - --providers.file.directory=/run/secrets/
       - --providers.file.watch=true
       - --entrypoints.web.address=:80
       - --entrypoints.websecure.address=:443

@@ -4,7 +4,6 @@ export const routes = {
     LINKEDIN: 'https://www.linkedin.com/in/mewil/',
     PHOTOGRAPHY: 'https://www.instagram.com/athenianlabsphotography',
     VIDEOGRAPHY: 'https://vimeo.com/athenianlabs',
-    RESUME:
-        'http://www-personal.umich.edu/~mewil/michael%20wilson%20resume.pdf',
+    RESUME: '/michael-wilson-resume.pdf',
     CONTACT: 'mailto:mewil@umich.edu'
 };
