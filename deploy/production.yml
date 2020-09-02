@@ -74,7 +74,7 @@ services:
       - GF_USERS_AUTO_ASSIGN_ORG=true
       - GF_LOG_MODE=console
       - GF_PANELS_DISABLE_SANITIZE_HTML=true
-      - GF_DATABASE_URL=postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/grafana
+      - GF_DATABASE_URL=postgres://root:${POSTGRES_PASSWORD}@postgres:5432/grafana
       - GF_DATABASE_SSL_MODE=require
     volumes:
       - grafanadata:/var/lib/grafana
@@ -89,6 +89,37 @@ services:
         - "traefik.http.routers.grafana.middlewares=auth-middleware"
         - "traefik.http.services.grafana.loadbalancer.server.port=3000"
 
+  n8n:
+    image: n8nio/n8n:0.79.3
+    networks:
+      - mewil
+    volumes:
+      - n8ndata:/root/.n8n
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.n8n.rule=Host(`workflows.mewil.io`)"
+        - "traefik.http.routers.n8n.entrypoints=websecure"
+        - "traefik.http.routers.n8n.tls.certresolver=le"
+        - "traefik.http.routers.n8n.middlewares=auth-middleware"
+        - "traefik.http.services.n8n.loadbalancer.server.port=5678"
+
+  postgres:
+    image: postgres:12
+    container_name: postgres
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_DB=grafana
+      - POSTGRES_USER=postgres
+    volumes:
+      - postgresdata:/var/lib/postgresql/data
+    deploy:
+      mode: replicated
+      replicas: 1
+
 secrets:
   traefik.toml:
     external: true
@@ -101,4 +132,8 @@ volumes:
   letsencryptdata:
     external: true
   grafanadata:
+    external: true
+  n8ndata:
+    external: true
+  postgresdata:
     external: true
