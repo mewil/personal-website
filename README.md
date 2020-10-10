@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/mewil/personal-website.svg?branch=master)](https://travis-ci.org/mewil/personal-website)
 
-My personal website built in [React](https://reactjs.org/) plus a [Grafana](https://grafana.com) dashboard protected by Google OAuth, all proxied through [Traefik](https://containo.us/traefik/). Hosted on [Digital Ocean](https://www.digitalocean.com/).
+My personal website built in [React](https://reactjs.org/) plus a [Grafana](https://grafana.com) dashboard and [Hasura](https://hasura.io/) instance protected by Google OAuth, all proxied through [Traefik](https://containo.us/traefik/). Hosted on [Digital Ocean](https://www.digitalocean.com/).
 
 ## Setup
 
