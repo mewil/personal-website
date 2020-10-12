@@ -95,6 +95,11 @@ services:
       - mewil
     volumes:
       - n8ndata:/root/.n8n
+    environment:
+      - WEBHOOK_TUNNEL_URL=https://workflows.mewil.io/
+      - VUE_APP_URL_BASE_API=https://workflows.mewil.io/
+      - N8N_PROTOCOL=https
+      - N8N_HOST=workflows.mewil.io
     deploy:
       mode: replicated
       replicas: 1
