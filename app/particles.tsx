@@ -1,6 +1,4 @@
-import { h } from 'react-hyperscript-helpers';
 import styled from 'styled-components';
-import Script from 'react-load-script';
 import { devices, GlobalStyle } from './styles';
 
 const Container = styled.div`
@@ -26,10 +24,9 @@ const ParticlesContainer = styled.div`
     `};
 `;
 
-export const Particles = () => {
-    return h(Container, [
-        h(GlobalStyle),
-        h(ParticlesContainer, '#particles-js'),
-        h(Script, { url: 'particles.js' })
-    ]);
-};
+export const Particles = () => (
+    <Container>
+        <GlobalStyle />
+        <ParticlesContainer id="particles-js" />
+    </Container>
+);

@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-import { Helmet } from 'react-helmet';
-import { div, title, h } from 'react-hyperscript-helpers';
 import { routes } from './constants';
 import { devices, theme } from './styles';
 
@@ -29,8 +27,8 @@ const FlexWrapper = styled.div`
 `;
 
 const StyledALink = styled.a`
-    font-size: 12px;
-    padding: 2px 35px;
+    font-size: 16px;
+    padding: 2px 25px;
     margin: 10px 0 10px 15px;
     color: ${theme.primary};
     transition: all 0.5s;
@@ -44,25 +42,28 @@ const StyledALink = styled.a`
         background: ${theme.secondary};
     }
     ${devices.tablet`
-
-    font-size: 20px;
+        font-size: 16px;
+        padding: 2px 25px;
         justifyContent: space-between;
         flex-direction: row;
     `};
+    ${devices.desktop`
+        font-size: 20px;
+    `};
 `;
 
-export const Header = () => {
-    return div([
-        h(Helmet, [title('Michael Wilson')]),
-        h(Wrapper, [
-            h(FlexWrapper, [
-                h(StyledALink, { href: routes.PROJECTS }, ['Projects']),
-                h(StyledALink, { href: routes.LINKEDIN }, ['LinkedIn']),
-                h(StyledALink, { href: routes.PHOTOGRAPHY }, ['Photography']),
-                h(StyledALink, { href: routes.VIDEOGRAPHY }, ['Videography']),
-                h(StyledALink, { href: routes.RESUME }, ['Resume']),
-                h(StyledALink, { href: routes.CONTACT }, ['Contact'])
-            ])
-        ])
-    ]);
-};
+export const Header = () => (
+    <>
+        <title>Michael Wilson</title>
+        <Wrapper>
+            <FlexWrapper>
+                <StyledALink href={routes.PROJECTS}>Projects</StyledALink>
+                <StyledALink href={routes.LINKEDIN}>LinkedIn</StyledALink>
+                <StyledALink href={routes.PHOTOGRAPHY}>Photography</StyledALink>
+                <StyledALink href={routes.VIDEOGRAPHY}>Videography</StyledALink>
+                <StyledALink href={routes.RESUME}>Resume</StyledALink>
+                <StyledALink href={routes.CONTACT}>Contact</StyledALink>
+            </FlexWrapper>
+        </Wrapper>
+    </>
+);
