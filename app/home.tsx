@@ -23,9 +23,11 @@ const LIST = [
         url: 'https://aws.amazon.com/codeguru/',
         date: 'August 2020 - Present',
         points: [
-            'Extended proprietary static analysis tools and service infrastructure to support Python source code for launch at ReInvent 2020',
-            "Designed and implemented a usage metering system to support CodeGuru Reviewer's new pricing model and drive increased customer adoption",
-            'As a software engineer, concurrently managed 6 direct reports to deliver 10x more recommendations on Python source code for the Python General Availability launch compared to ReInvent 2020'
+            'Led the design, implementation, and evaluation of a new secrets detector launched at re:Invent 2021 to identify hardcoded secrets in customer source code and secure them with AWS Secrets Manager',
+            "Designed and implemented a usage metering system to support CodeGuru Reviewer's new pricing model",
+            'As a software engineer, concurrently managed 6 direct reports and delivered 10x more recommendations on Python source code for the Python General Availability launch compared to re:Invent 2020',
+            'Coauthored a paper on type inference of AWS SDK clients in Python source code submitted to ECOOP22',
+            'Extended static analysis tooling and service infrastructure and implemented code quality detectors to support Python source code for launch at re:Invent 2020'
         ]
     },
     {
@@ -34,7 +36,7 @@ const LIST = [
         url: 'https://aws.amazon.com/codeguru/',
         date: 'May 2019 - August 2019',
         points: [
-            'Designed and implemented a terabyte scale data warehouse to enable static code analysis research'
+            'Designed and implemented a terabyte-scale data warehouse to enable static code analysis research'
         ]
     },
     {
@@ -43,9 +45,9 @@ const LIST = [
         url: 'https://exploration.engin.umich.edu',
         date: 'September 2017 - Present',
         points: [
-            "Managed software development and delivery of cube satellites including the Tandem Beacon Experiment (TBEx), which successfully launched on SpaceX's STP-2 Falcon Heavy Mission in June, 2019",
-            'Built an end-to-end communications pipeline that gathers satellite telemetry in orbit, downlinks the data to ground stations on Earth, aggregates the data for analysis and securely displays the telemetry on the web',
-            'Developed and evaluated mission critical payload and communications flight software for TBEx using flight and prototype units for extensive integration tests',
+            "Managed software development and delivery of cube satellites including the Tandem Beacon Experiment (TBEx), launched on SpaceX's STP-2 Falcon Heavy Mission in June, 2019",
+            'Built an end-to-end distributed communications pipeline that gathers satellite telemetry in orbit, schedules downlinks of the data to ground stations on Earth, aggregates the data for analysis, securely displays the telemetry on the web, and can be controlled via Slack integrations',
+            'Developed and evaluated mission critical payload and communications flight software for TBEx and used flight and prototype units for hardware-in-the-loop testing',
             'Received a grant and honorable mention at the SmallSat Conference Student Competition for my paper "Applying Modern Software System Design to Small Satellite Development and Operations"'
         ]
     },
@@ -55,21 +57,9 @@ const LIST = [
         url: 'https://trove.com',
         date: 'May 2018 - May 2019',
         points: [
-            'Analyzed user behavior to iterate on captivating user experiences for a professional networking web app',
-            'Wrote unit and integration tests for the REST API service and web client to ensure quality and correctness',
+            'Created a frontend analytic framework to analyze user behavior and iterate on captivating user experiences for a professional networking web app',
             'Added new REST API endpoints to the back-end application to provide novel access to user data',
-            'Implemented a new mobile and email notification system to decrease latency'
-        ]
-    },
-    {
-        company: 'Athenian Labs, LLC',
-        title: 'Software Engineer',
-        date: 'May 2018 - May 2019',
-        points: [
-            'Analyzed user behavior to iterate on captivating user experiences for a professional networking web app',
-            'Wrote unit and integration tests for the REST API service and web client to ensure quality and correctness',
-            'Added new REST API endpoints to the back-end application to provide novel access to user data',
-            'Implemented a new mobile and email notification system to decrease latency'
+            'Implemented a new mobile and email notification system to improve delivery latency'
         ]
     },
     {
